@@ -2,16 +2,16 @@
 var startBtn = document.querySelector("#start");
 var questionEl = document.querySelector("#question");
 var answerLi = document.querySelector(".answers");
-var counter = document.querySelector("#timeLeft");
-var message = document.querySelector("#message");
-var score = document.querySelector(".score");
+var timeleftEl = document.querySelector("#timeLeft");
+var score = document.querySelector("#score");
+var curMessage = document.querySelector("#message");
+
 var rgtAnswer = ""
 
 // console.log(questionEl);
 // console.log(answerLi);
-
-
-
+console.log(curMessage);
+window.alert("after pressing ok please press start button to start the code quiz");
 // //define questions and answers as objects
 var dataBase = [
 
@@ -64,7 +64,6 @@ function takeRight(rgt, i){
 }
 // console.log(tkRight(dataBase,0));
 
-
 function showQuestion(num){
     displayQuestion(dataBase,num)
     displayAnswer(dataBase,num)
@@ -73,16 +72,74 @@ function showQuestion(num){
 }
 // //change question-answers
 var curQ = 0
+var num = 3;
 showQuestion(curQ);
-answerLi.addEventListener("click", function(event){
-    event.preventDefault();
-    var selectedChoice = event.target.dataset.option;
-    var rgtAns = takeRight(dataBase,curQ);
-    console.log(selectedChoice);
-    console.log(rgtAns);
-    curQ = curQ+1;
-    showQuestion(curQ);
-});
+function selectOptions(){
+
+    var checker = true;
+    answerLi.addEventListener("click", function(event){
+        event.preventDefault();
+        var selectedChoice = event.target.dataset.option;
+        var rightAnswer = takeRight(dataBase,curQ);
+        // console.log(selectedChoice);
+        // console.log(rightAnswer);
+        if (selectedChoice === rightAnswer){
+            
+            curMessage.textContent = "It was correct";   
+            
+            score.textContent = "score: " + num;
+            var checker = true;
+        }else{
+            
+            curMessage.textContent = "it was wrong";
+            num = num-1;
+            score.textContent = "score: " + num;
+            var checker = false;
+        }
+        curQ = curQ+1;
+        if(curQ >= dataBase.length){
+            curMessage.textContent = `your final score is: ${num} out of ${dataBase.length}` ;
+        }else{
+        }
+        showQuestion(curQ);
+        return checker;
+        
+
+    });
+    return checker;
+}
+// ______________________________
+
+
+var duration = 10;
+function startTimer() {
+
+    selectOptions();
+    // start the timer
+    
+    var count = 0;
+    // document.addEventListener("keypress", keypressHandler);
+    timer = setInterval(function () {
+      count++;
+      var remainingSeconds = duration - count;
+      // show the time left
+      timeleftEl.textContent = remainingSeconds + " seconds";
+    //   if (checker === false){
+    //       remainingSeconds = remainingSeconds - 3
+    //   }
+      if (count >= duration) {
+        // Time is up
+        finishTheGame();
+      }
+    }, 1000);
+  }
+  function finishTheGame(){
+      clearInterval(timer);
+      curMessage.textContent = "The game is over now";
+  }
+startBtn.addEventListener("click", startTimer);
+
+    // localStorage.setItem("score", score);
 // num = 0
 // if (num <= dataBase.length){
 //     answerLi.addEventListener("click", function(event){
