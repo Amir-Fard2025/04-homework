@@ -9,20 +9,29 @@
 </head>
 <body>
     <button id="start">Start</button>
-    <form class="query">
 
-        <h1 id="question"></h1>
-        <ol class="answers">
-            <button class="answer" data-option="1" id="answer1"></button>
-            <button class="answer" data-option="2" id="answer2"></button>
-            <button class="answer" data-option="3" id="answer3"></button>
-            <button class="answer" data-option="4" id="answer4"></button>
-        </ol4>
-    </form>
-    
-    <h3 id="timeLeft">time</h3>
-    <div id="score">Score</div>
-    <h3 id="message">Message</h3>
+    <h3 id="startMessage">Press start to begin</h3>
+    <div id="questionDiv">
+
+        <form class="query">
+            
+            <h2 id="question"></h2>
+            <ol class="answers">
+                <button class="answer" data-option="1" id="answer1"></button>
+                <button class="answer" data-option="2" id="answer2"></button>
+                <button class="answer" data-option="3" id="answer3"></button>
+                <button class="answer" data-option="4" id="answer4"></button>
+            </ol4>
+        </form>
+        
+        <h3 id="timeLeft">Remaining time</h3>
+        <div id="score">Score</div>
+        <h3 id="message">Message</h3>
+    </div>
+        <div id= "score">
+        <input id = "submitBox" type="text"/>
+        <button id = "submitButton">Submit</button>
+    </div>
     <script src="./script.js"></script>    
 </body>
 </html>
